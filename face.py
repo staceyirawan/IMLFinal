@@ -58,7 +58,7 @@ while(True):
 					raise
 				else:
 					# Wait a few seconds before retrying and hope the problem goes away
-					time.sleep(3) 
+					sleep(3) 
 					tries -= 1
 					continue
 
