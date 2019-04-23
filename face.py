@@ -46,7 +46,22 @@ while(True):
 			imageString = base64.b64encode(imageFile.read())
 
 		response = requests.post(face_api_url, params=params, headers=headers, data=data)
-		responseText = (json.loads(response.text))[0]['faceAttributes']['emotion']
+		tries = 5
+		while tries >= 0:
+			try:
+				responseText = (json.loads(response.text))[0]['faceAttributes']['emotion']
+				break
+			except:
+				if tries == 0:
+					# If we keep failing, raise the exception for the outer exception
+					# handling to deal with
+					raise
+				else:
+					# Wait a few seconds before retrying and hope the problem goes away
+					time.sleep(3) 
+					tries -= 1
+					continue
+
 		print(responseText)
 		max = 0.0
 		maxEmotion = "neutral"
