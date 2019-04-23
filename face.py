@@ -51,7 +51,8 @@ while(True):
 		tries = 5
 		while tries >= 0:
 			try:
-				responseText = (json.loads(response.text))[0]['faceAttributes']['emotion']
+				if (len(json.loads(response.text))) !=0:
+					responseText = (json.loads(response.text))[0]['faceAttributes']['emotion']
 				break
 			except:
 				if tries == 0:
@@ -64,7 +65,7 @@ while(True):
 					tries -= 1
 					continue
 
-		print(responseText)
+		#print(responseText)
 		max = 0.0
 		maxEmotion = "neutral"
 		for emotion in responseText:
