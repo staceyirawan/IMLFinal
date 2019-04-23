@@ -51,16 +51,14 @@ while(True):
 		tries = 5
 		while tries >= 0:
 			try:
-				if (len(json.loads(response.text))) !=0:
+				if (len(json.loads(response.text))) == 1:
 					responseText = (json.loads(response.text))[0]['faceAttributes']['emotion']
 				break
 			except:
 				if tries == 0:
-					# If we keep failing, raise the exception for the outer exception
-					# handling to deal with
 					raise
 				else:
-					# Wait a few seconds before retrying and hope the problem goes away
+					# Wait a few seconds before retrying 
 					time.sleep(3) 
 					tries -= 1
 					continue
