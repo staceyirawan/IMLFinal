@@ -1,4 +1,4 @@
-from time import time
+import time
 import base64
 import requests
 import cv2
@@ -6,10 +6,12 @@ import numpy as np
 import os
 import json
 
-time_prev = time()
+time_prev = time.time()
 change = 0
 
 video_capture = cv2.VideoCapture(0)
+video_capture.set(cv2.CAP_PROP_FRAME_WIDTH, 160)
+video_capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 120)
 
 subscription_key = 'c155c1d6247145a08c5d987762889567'
 assert subscription_key
@@ -29,7 +31,7 @@ params = {
 
 while(True):
 	ret, frame = video_capture.read()
-	time_now = time()
+	time_now = time.time()
 	change += time_now - time_prev
 	time_prev = time_now
 
@@ -58,7 +60,7 @@ while(True):
 					raise
 				else:
 					# Wait a few seconds before retrying and hope the problem goes away
-					sleep(3) 
+					time.sleep(3) 
 					tries -= 1
 					continue
 
